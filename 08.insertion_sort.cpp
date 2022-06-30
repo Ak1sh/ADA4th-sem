@@ -31,11 +31,15 @@ void print(int arr[],int n)
 }
 int main()
 {
+    clock_t timeTaken;
     int n;
     cin>>n;
     int arr[n];
     input(arr,n);
+    timeTaken = clock();
     insertion_sort(arr,n);
+    timeTaken = clock() - timeTaken;
+    cout<<"insertion sort: "<<timeTaken<<"clocks\n";
     print(arr,n);
 
     return 0;
