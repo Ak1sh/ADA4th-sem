@@ -1,48 +1,53 @@
-
-#include <iostream>
 #include<bits/stdc++.h>
 using namespace std;
-void merge(int arr[],int left,int mid,int right)
-{
-    int n1=mid-left+1;
-    int n2=right-mid+1;
+
+void merge(int arr[],int first,int last, int mid){
+    int n1 = mid-first + 1;
+    int n2 = last - mid;
+    
     int a[n1];
     int b[n2];
-    for(int i=0;i<n1;i++)
-    a[i]=arr[i];
-    for(int i=mid+1;i<n2;i++)
-    b[i]=arr[i];
-    int it1=0,it2=0,k=0;
-    while(it1<n1&& it2<n2)
-    {
-        if(a[it1]<=b[it2]) arr[k++]=a[it1++];
-        else arr[k++]=b[it2++];
+    
+    for(int i=0;i<n1;i++){
+        a[i] = arr[first+i];
     }
-    while(it1<n1)
-    arr[k++]=a[it1];
-    while(it2<n2)
-    arr[k++]=b[it2];
-}
-void mergesort(int arr[],int left,int right)
-{
-   
-    if(left<right)
-    {
-           int mid=(left+right)/2;
-    mergesort(arr,left,mid);
-    mergesort(arr,mid+1,right);
-    merge(arr,left,mid,right); 
+    for(int i=0;i<n2;i++){
+        b[i] = arr[mid+i+1];
     }
     
-
+    int i=0,j=0,k=first;
+    while(i<n1 && j<n2){
+        if(a[i] <= b[j]){
+            arr[k++] = a[i++];
+        }
+        else{
+            arr[k++] = b[j++];
+        }
+    }
+    
+    while(i < n1){
+        arr[k++] = a[i++];
+    }
+    while(j < n2){
+        arr[k++] = b[j++];
+    }
 }
-int main()
-{
-  
-  int arr[]={5,2,9,7,3}; 
-   mergesort(arr,0,4);
 
-   for(int i=0;i<5;i++)
-   cout<<arr[i]<<" ";
+void mergeSort(int arr[],int first,int last){
+    if(first < last){
+        int mid = (first + last) / 2;
+        mergeSort(arr,first,mid);
+        mergeSort(arr,mid+1,last);
+        
+        merge(arr,first,last,mid);
+    }
+}
+
+int main(){
+    int arr[] = {5,4,1,3,2,1};
+    mergeSort(arr,0,5);
+    for(int i=0;i<6;i++){
+        cout<<arr[i]<< " ";
+    }
     return 0;
 }
