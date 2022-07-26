@@ -4,20 +4,17 @@ using namespace std;
 
 int binarySearch(int arr[], int high, int low, int key){
     int mid;
-    while(low<=high){
+    if(low<=high){
         mid = (high+low)/2;
-        if(arr[mid] == key)
-            return mid;
-        else if(arr[mid] > key)
-            return binarySearch(arr, mid-1, low, key);
-        else 
-            return binarySearch(arr, high, mid+1, key);
+        if(arr[mid] == key) return mid;
+        else if(arr[mid] > key) return binarySearch(arr, mid-1, low, key);
+        else return binarySearch(arr, high, mid+1, key);      
     }
     return -1;
 }
 
 int linearSearch(int arr[], int key, int i, int n){
-    while(i<n){
+    if (i<n){
         if(arr[i] == key)
             return i;
         else
