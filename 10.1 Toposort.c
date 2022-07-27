@@ -8,12 +8,15 @@ bool dfs(int adj[][v],int start,int n,int visited[],int visal[]){
     visal[start]=1;
     visited[start]  = 1;
     for(int i=0;i<v;i++){
-        if(adj[start][i] == 1 && visited[i] == 0)
+        if(adj[start][i] == 1)
         {
-            if(dfs(adj,i,n,visited,visal)) return false;
-            
+            if( visited[i] == 0)
+            {
+                 if(dfs(adj,i,n,visited,visal)) return false;
+            }
+             else if(visal[i]==visited[i]) return true;
         }
-        else if(visal[i]==visited[i]) return true;
+       
         
     }
     visal[start]=0;
