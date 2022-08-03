@@ -1,6 +1,7 @@
 //Tc : O(nlogn)
 //Sc :O(1)
 #include <iostream>
+#include<time.h>
 #include<bits/stdc++.h>
 using namespace std;
 void heapify(int arr[],int n,int i)
@@ -34,12 +35,17 @@ void printarray(int arr[],int n)
 }
 int main()
 {
+
    int n;
    cin>>n;
    int arr[n];
    for(int i=0;i<n;i++)
    cin>>arr[i];
-   heapsort(arr,n);
+    clock_t timeTaken = clock();
+    heapsort(arr,n);
+   clock_t end = clock();
+    cout<<"Heap sort: "<<(double)(end-timeTaken)/CLOCKS_PER_SEC<<"clocks\n";
+  
    printarray(arr,n);
     return 0;
 }
