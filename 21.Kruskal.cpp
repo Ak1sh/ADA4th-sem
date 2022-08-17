@@ -59,6 +59,10 @@ int main(){
 	int cost = 0;
 	vector<pair<int,int>> mst; 
 	for(auto it : edges) {
+	    if(findPar(it.v, parent) == findPar(it.u, parent))
+	    {
+	        cout<<"Cycle vertice:"<<it.u<<"--"<<it.v<<endl;
+	    }
 	    if(findPar(it.v, parent) != findPar(it.u, parent)) {
 	        cost += it.wt; 
 	        mst.push_back({it.u, it.v}); 
